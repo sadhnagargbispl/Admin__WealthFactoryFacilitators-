@@ -67,10 +67,12 @@ public partial class Home : System.Web.UI.Page
             DataSet ds = new DataSet();
             DataTable dt1 = new DataTable();
             DataTable dt2 = new DataTable();
-            DataTable dt3 = new DataTable();
+            DataTable dt5 = new DataTable();
+            DataTable dt6 = new DataTable();
+            DataTable dt7 = new DataTable();
             DAL obj = new DAL();
 
-            sql = obj.IsoStart + "  Exec Sp_WalletTotalSummaryDigital " + obj.IsoEnd;
+            sql = obj.IsoStart + "  Exec Sp_WalletTotalSummary " + obj.IsoEnd;
             ds = SqlHelper.ExecuteDataset(constr1, CommandType.Text, sql);
             dt1 = ds.Tables[0];
             if (dt1.Rows.Count > 0)
@@ -85,12 +87,19 @@ public partial class Home : System.Web.UI.Page
                 RepFundWithrawal.DataSource = dt2;
                 RepFundWithrawal.DataBind();
             }
-            //dt3 = ds.Tables(3);
-            //if (dt3.Rows.Count > 0)
+            //dt5 = ds.Tables[5];
+            //if (dt5.Rows.Count > 0)
             //{
-            //    RptIncome.DataSource = dt3;
-            //    RptIncome.DataBind();
+            //    Retbusinss.DataSource = dt5;
+            //    Retbusinss.DataBind();
             //}
+            dt6 = ds.Tables[5];
+            if (dt6.Rows.Count > 0)
+            {
+                RetDailyMonthlybusinss.DataSource = dt6;
+                RetDailyMonthlybusinss.DataBind();
+            }
+            
         }
         catch (Exception ex)
         {

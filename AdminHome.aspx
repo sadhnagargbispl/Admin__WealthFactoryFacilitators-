@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AdminHome.aspx.cs" Inherits="AdminHome" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AdminHome.aspx.cs" Inherits="AdminHome" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script language="javascript" type="text/javascript">
@@ -12,7 +12,6 @@
         });
 
         function ShowMenu(Dv, control, e) {
-            debugger;
             var posx = e.clientX + window.pageXOffset + 'px'; //Left Position of Mouse Pointer
             var posy = e.clientY + window.pageYOffset + 'px'; //Top Position of Mouse Pointer
             var StrArr = Dv.id.split(';');
@@ -118,6 +117,7 @@
                                             <asp:ListItem Value="EMail">Email</asp:ListItem>
                                             <asp:ListItem Value="DOJ">Joining Date</asp:ListItem>
                                             <asp:ListItem Value="KitName">Package Name</asp:ListItem>
+                                            <asp:ListItem Value="walletaddress">Wallet Address</asp:ListItem>
                                         </asp:DropDownList>
                                         &nbsp;&nbsp; &nbsp; &nbsp;
                                     </div>
@@ -183,7 +183,7 @@
                                                 <ItemTemplate>
 
                                                     <div id="DivOptions">
-                                                        <div id='<%# Eval("Email") +";"+ Eval("ActiveStatus") +";"+ Eval("IsBlock") +";"+ Eval("Site") +";"+ Eval("LgnID")  %>'
+                                                        <div id='<%# Eval("IDNo") +";"+ Eval("ActiveStatus") +";"+ Eval("IsBlock") +";"+ Eval("Site") +";"+ Eval("LgnID")  %>'
                                                             style="background-color: #99CCCC; color: Black; font-weight: bold; font-size: 12px"
                                                             onclick="ShowMenu(this,'contextMenu',event);">
                                                             <asp:Image runat="server" ID="Image1" ImageUrl="~/img/moreopt.jpg" AlternateText="More Option.." />
@@ -191,7 +191,7 @@
                                                     </div>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Mobile No." SortExpression="MobileNo" Visible="false">
+                                            <asp:TemplateField HeaderText="Mobile No." SortExpression="MobileNo" Visible="true">
                                                 <ItemTemplate>
                                                     <asp:Label ID="Mobile" runat="server" Text='<%# Eval("MobileNo") %>'></asp:Label>
                                                 </ItemTemplate>
@@ -201,11 +201,11 @@
                                                     <asp:Label ID="Email" runat="server" Text='<%# Eval("Email") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <%-- <asp:TemplateField HeaderText="Package" SortExpression="KitName">
+                                            <asp:TemplateField HeaderText="Package" SortExpression="KitName">
                                                 <ItemTemplate>
                                                     <asp:Label ID="Package" runat="server" Text='<%# Eval("KitName") %>'></asp:Label>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>--%>
+                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Package Amount" SortExpression="KitAmount" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="PackageAmount" runat="server" Text='<%# Eval("KitAmount") %>'></asp:Label>
@@ -236,6 +236,11 @@
                                                     <asp:Label ID="UpgrdDate" runat="server" Text='<%# Eval("UpgrdDate") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                            <%--<asp:TemplateField HeaderText="Wallet Address" SortExpression="walletaddress">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="Status" runat="server" Text='<%# Eval("walletaddress") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Status" SortExpression="Status">
                                                 <ItemTemplate>
                                                     <asp:Label ID="Status" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
@@ -244,11 +249,6 @@
                                             <asp:TemplateField HeaderText="E-Wallet" Visible="false" SortExpression="Balance">
                                                 <ItemTemplate>
                                                     <asp:Label ID="Wallet" runat="server" Text='<%# Eval("Balance") %>'></asp:Label>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Plan" SortExpression="fld5">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="fld5" runat="server" Text='<%# Eval("fld5") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>

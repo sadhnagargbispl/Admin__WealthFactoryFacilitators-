@@ -211,7 +211,7 @@ public partial class WalletReport : System.Web.UI.Page
                 LabelFundWallet.Text = "Fund Wallet Balance : " + LabelWorking;
                // LabelProductWallet.Text = "Product Wallet Balance  : " + LabelProduct;
                 LabelEarningWallet.Text = "Earning Wallet Balance   : " + LabelEarning;
-                LabelPointWallet.Text = "Point Wallet Balance   : " + LabelEarning;
+                //LabelPointWallet.Text = "Point Wallet Balance   : " + LabelEarning;
                // LabelPointWalletNew.Text = "Point Wallet New Balance   : " + LabelPointNew;
             }
             else

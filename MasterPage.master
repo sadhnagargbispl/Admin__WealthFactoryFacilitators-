@@ -82,13 +82,12 @@
 
 
     </script>
-     <style>
+    <style>
         /* Add this in your CSS file */
-.label-large {
-    font-size: 20px; /* Adjust the size as needed */
-    font-weight: bold; /* Optional: make the text bold */
-}
-
+        .label-large {
+            font-size: 20px; /* Adjust the size as needed */
+            font-weight: bold; /* Optional: make the text bold */
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -121,20 +120,20 @@
                             <i class="fas fa-expand-arrows-alt"></i>
                         </a>
                     </li>
-                   
+
                 </ul>
             </nav>
-           
+
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="Home.aspx" class="brand-link">
-                   
-                   <img src="images/logo.png" style="max-width:150px;" />
+
+                    <img src="<%=Session["LogoUrl"].ToString ()%>" style="max-width: 150px; background-color: #0d3f55; border-radius: 7px;" />
 
                 </a>
-                <div class="sidebar" >
+                <div class="sidebar">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                       <%-- <div class="image">
+                        <%-- <div class="image">
                             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                         </div>--%>
                         <div class="info">
@@ -145,20 +144,19 @@
                     <!-- Sidebar Menu -->
                     <uc1:UCMenu ID="WUCMenu1" runat="server" />
                 </div>
-     
+
             </aside>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
             <footer class="main-footer">
-                <strong>    
+                <strong>
                     <asp:Label ID="lblCompanyName" runat="server" Text=""></asp:Label></strong>
             </footer>
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
-     
             </aside>
-    
+
         </div>
     </form>
 </body>

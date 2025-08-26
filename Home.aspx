@@ -91,7 +91,7 @@
                                 <ItemTemplate>
                                     <div class="col-lg-4 col-12">
                                         <!-- small box -->
-                                       <div class="small-box bg-danger">
+                                        <div class="small-box bg-danger">
                                             <div class="inner">
                                                 <h3><%#Eval("Amount")%></h3>
 
@@ -108,7 +108,56 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.row -->
+
+          <%--      <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <asp:Repeater runat="server" ID="Retbusinss">
+                                <ItemTemplate>
+                                    <div class="col-lg-4 col-12">
+                                      
+                                        <div class="small-box bg-danger">
+                                            <div class="inner">
+                                                <h3><%#Eval("Amount")%></h3>
+
+                                                <p><%#Eval("Name")%></p>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="ion ion-stats-bars"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer">&nbsp;</a>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                </div>--%>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <asp:Repeater runat="server" ID="RetDailyMonthlybusinss">
+                                <ItemTemplate>
+                                    <div class="col-lg-4 col-12">
+                                        <!-- small box -->
+                                        <div class="small-box bg-danger">
+                                            <div class="inner">
+                                                <h3><%#Eval("CurrentMonthBusiness")%></h3>
+
+                                                <p><%#Eval("Name")%></p>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="ion ion-stats-bars"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer">&nbsp;</a>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Main row -->
 
             </div>

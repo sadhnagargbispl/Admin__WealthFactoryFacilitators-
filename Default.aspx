@@ -18,7 +18,7 @@
         <div class="wrapper">
             <div id="formContent">
                 <div class="fadeIn first">
-                   <img src="images/logo.png" style="max-width:230px;" />
+                   <img src="<%=Session["LogoUrl"].ToString ()%>" style="max-width: 250px; background-color: #0d3f55; border-radius: 7px;" />
                 </div>
                 <div>
                     <asp:TextBox ID="TxtUID" runat="server" CssClass="fadeIn second" placeholder="User-ID"></asp:TextBox>
