@@ -8,7 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 public partial class DailyIncentiveDetailReport : System.Web.UI.Page
 {
-     DataTable Dt = new DataTable();
+    DataTable Dt = new DataTable();
     DataSet Ds = new DataSet();
     string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
     string constr1 = ConfigurationManager.ConnectionStrings["constr1"].ConnectionString;
@@ -21,10 +21,10 @@ public partial class DailyIncentiveDetailReport : System.Web.UI.Page
             if (!IsPostBack)
             {
 
-          
+
                 if (Session["AStatus"] != null)
                 {
-                    BindFromDate();
+                    BindSession();
                     Fillpage();
                 }
                 else
@@ -36,6 +36,21 @@ public partial class DailyIncentiveDetailReport : System.Web.UI.Page
         catch (Exception ex)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+        }
+    }
+    public void BindSession()
+    {
+        try
+        {
+            DataSet Ds = SqlHelper.ExecuteDataset(constr1, "sp_GetMonthlySession");
+            ddlSession.DataSource = Ds.Tables[0];
+            ddlSession.DataValueField = "SessID";
+            ddlSession.DataTextField = "SessnName";
+            ddlSession.DataBind();
+        }
+        catch (Exception ex)
+        {
+            // You may want to log ex instead of ignoring it
         }
     }
 
@@ -54,25 +69,7 @@ public partial class DailyIncentiveDetailReport : System.Web.UI.Page
             throw new Exception(ex.Message);
         }
     }
-    public void BindFromDate()
-    {
-        try
-        {
-            Ds = SqlHelper.ExecuteDataset(constr, "sp_GetDailySessionDetail");
-            DDlFromDate.DataSource = Ds.Tables[0];
-            DDlFromDate.DataValueField = "SessID";
-            DDlFromDate.DataTextField = "Fromdate";
-            DDlFromDate.DataBind();
-            DDltodate.DataSource = Ds.Tables[0];
-            DDltodate.DataValueField = "SessID";
-            DDltodate.DataTextField = "Todate";
-            DDltodate.DataBind();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-    }
+
     protected void BtnShow_Click(object sender, EventArgs e)
     {
         try
@@ -91,27 +88,23 @@ public partial class DailyIncentiveDetailReport : System.Web.UI.Page
 
         try
         {
-            string FromSessid = "0";
             string ToSessid = "0";
             string Idno = "0";
 
-            FromSessid = DDlFromDate.Text != "" ? DDlFromDate.Text : Session["CompDate"].ToString();
-            ToSessid = DDltodate.Text != "" ? DDltodate.Text : DateTime.Now.ToString("dd-MMM-yyyy");
+            //FromSessid = DDlFromDate.Text != "" ? DDlFromDate.Text : Session["CompDate"].ToString();
+            ToSessid = ddlSession.SelectedValue;
             Idno = txtMemId.Text != "" ? txtMemId.Text : "0";
-
             GvData.DataSource = null;
             GvData.DataBind();
-            SqlParameter[] prms = new SqlParameter[7];
+            SqlParameter[] prms = new SqlParameter[6];
             prms[0] = new SqlParameter("@IDNo", Idno.ToLower());
-            prms[1] = new SqlParameter("@FromSessid", FromSessid);
-            prms[2] = new SqlParameter("@ToSessid", ToSessid);
-            prms[3] = new SqlParameter("@PageIndex", PageIndex);
-            prms[4] = new SqlParameter("@PageSize", 100000000);
-            //int.Parse(ddlPageSize.SelectedValue)
-            prms[5] = new SqlParameter("@IsExport", "N");
-            prms[6] = new SqlParameter("@RecordCount", SqlDbType.Int);
-            prms[6].Direction = ParameterDirection.Output;
-            Ds = SqlHelper.ExecuteDataset(constr1, "sp_GetDailyPayoutDetailAdmin", prms);
+            prms[1] = new SqlParameter("@ToSessid", ToSessid);
+            prms[2] = new SqlParameter("@PageIndex", PageIndex);
+            prms[3] = new SqlParameter("@PageSize", 100000000);
+            prms[4] = new SqlParameter("@IsExport", "N");
+            prms[5] = new SqlParameter("@RecordCount", SqlDbType.Int);
+            prms[5].Direction = ParameterDirection.Output;
+            Ds = SqlHelper.ExecuteDataset(constr1, "sp_GetDailyPayoutDetailAdminUpdate", prms);
             GvData.DataSource = Ds.Tables[0];
             GvData.DataBind();
             int recordCount = (int)Ds.Tables[1].Rows[0]["RecordCount"];
@@ -130,7 +123,9 @@ public partial class DailyIncentiveDetailReport : System.Web.UI.Page
             else
             {
                 lblError.Text = "No Record Found!!";
-                GvData.Visible = false;
+                lblCount.Text = "Total Record: 0";
+                lblinv.Text = "Total Income: 0";
+                GvData.Visible = true;
             }
 
         }
@@ -158,8 +153,8 @@ public partial class DailyIncentiveDetailReport : System.Web.UI.Page
             string ToSessid = "0";
             string Idno = "0";
 
-            FromSessid = DDlFromDate.Text != "" ? DDlFromDate.Text : Session["CompDate"].ToString();
-            ToSessid = DDltodate.Text != "" ? DDltodate.Text : DateTime.Now.ToString("dd-MMM-yyyy");
+            //FromSessid = DDlFromDate.Text != "" ? DDlFromDate.Text : Session["CompDate"].ToString();
+            //ToSessid = DDltodate.Text != "" ? DDltodate.Text : DateTime.Now.ToString("dd-MMM-yyyy");
             Idno = txtMemId.Text != "" ? txtMemId.Text : "0";
 
             GvData.DataSource = null;
