@@ -86,16 +86,16 @@ public partial class AddBvpoint : System.Web.UI.Page
 
                 string remark = "";
 
-                query = "INSERT INTO TrnBV(Sessid, Formno, LegNo, BV, Remark, RecTimeStamp, ActiveStatus,Bvtype,Dsessid,type,INRBV) VALUES " +
+                query = "INSERT INTO TrnBV(Sessid, Formno, LegNo, BV, Remark, RecTimeStamp, ActiveStatus,Bvtype,Dsessid) VALUES " +
                         "('" + Session["CurrentSessn"] + "', '" + Convert.ToInt32(TxtFormNo.Text) + "', '" + Convert.ToInt32(RbtLeg.SelectedValue) + "', " +
-                        "'" + Convert.ToDecimal(TxtFund.Text) / 90 + "', '" + TxtRemarks.Text + "', GETDATE(), 'Y','" + RbtType.SelectedValue + "', " +
-                        "CONVERT(VARCHAR, GETDATE(), 112),'" + rbtranktype.SelectedValue + "','" + Convert.ToDecimal(TxtFund.Text) + "')";
+                        "'" + Convert.ToDecimal(TxtFund.Text) + "', '" + TxtRemarks.Text + "', GETDATE(), 'Y','" + RbtType.SelectedValue + "', " +
+                        "CONVERT(VARCHAR, GETDATE(), 112))";
                 if (RbtType.SelectedValue == "T")
                 {
-                    query += ";INSERT INTO Repurchincome(Sessid, Formno, BillNo, Billdate, Repurchincome, Imported, BillType, SoldBy, MSessid, KitId, Dsessid, Remarks,PVValue,INRRepurchincome,PlanType) " +
+                    query += ";INSERT INTO Repurchincome(Sessid, Formno, BillNo, Billdate, Repurchincome, Imported, BillType, SoldBy, MSessid, KitId, Dsessid, Remarks,PVValue,PlanType) " +
                              "VALUES ('" + Session["CurrentSessn"] + "', '" + Convert.ToInt32(TxtFormNo.Text) + "', '', GETDATE(), 0, 'N', 'T', 'WR', " +
-                             "'" + Session["CurrentSessn"] + "', 0, CONVERT(VARCHAR, GETDATE(), 112), '" + TxtRemarks.Text.Trim() + "','" + Convert.ToDecimal(TxtFund.Text) / 90 + "'," +
-                             "'" + Convert.ToDecimal(TxtFund.Text) + "','I')";
+                             "'" + Session["CurrentSessn"] + "', 0, CONVERT(VARCHAR, GETDATE(), 112), '" + TxtRemarks.Text.Trim() + "','" + Convert.ToDecimal(TxtFund.Text) + "'," +
+                             "'I')";
                 }
 
                 if (objDAL.SaveData(query) != 0)

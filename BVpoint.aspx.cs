@@ -44,7 +44,7 @@ public partial class BVpoint : System.Web.UI.Page
         string sql = "SELECT CAST(A.BID AS VARCHAR) AS BID, a.Sessid,Replace(Convert(Varchar,a.RectimeStamp,106),' ','-')as Date, b.Idno, " +
                      "(b.MemFirstName + ' ' + b.MemLastName) AS MemberName, " +
                      "CASE WHEN a.LegNo = 1 THEN 'Left' ELSE 'Right' END AS LegNo, " +
-                     "a.BV,Case when a.BVType='S' then 'Self' else 'Tree' end as BvType,Type, a.Remark, " +
+                     "a.BV,Case when a.BVType='S' then 'Self' else 'Tree' end as BvType, a.Remark, " +
                      "CASE WHEN a.ActiveStatus = 'Y' THEN 'Active' ELSE 'Deactive' END AS Status " +
                      "FROM TrnBV AS a, M_memberMaster AS b " +
                      "WHERE a.Formno = b.Formno " +
